@@ -1,0 +1,1 @@
+# godot_ios_plugin_sample
