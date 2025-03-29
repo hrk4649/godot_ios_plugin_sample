@@ -1,7 +1,6 @@
 #import <Foundation/Foundation.h>
 
-#include "core/project_settings.h"
-#include "core/class_db.h"
+#include "core/config/project_settings.h"
 
 #import "godot_plugin_class.h"
 #import "godot_plugin-Swift.h"
@@ -79,13 +78,13 @@ Variant nsobject_to_variant(NSObject *object) {
     if ([object isKindOfClass:[NSString class]]) {
         return from_nsstring((NSString *)object);
     } else if ([object isKindOfClass:[NSData class]]) {
-        PoolByteArray ret;
+        PackedByteArray ret;
         NSData *data = (NSData *)object;
         if ([data length] > 0) {
             ret.resize([data length]);
             {
                 // PackedByteArray::Write w = ret.write();
-                copymem((void *)ret.read().ptr(), [data bytes], [data length]);
+                memcpy((void *)ret.ptr(), [data bytes], [data length]);
             }
         }
         return ret;
@@ -133,7 +132,7 @@ Variant nsobject_to_variant(NSObject *object) {
 NSObject *variant_to_nsobject(Variant v) {
     if (v.get_type() == Variant::STRING) {
         return to_nsstring((String)v);
-    } else if (v.get_type() == Variant::REAL) {
+    } else if (v.get_type() == Variant::FLOAT) {
         return [NSNumber numberWithDouble:(double)v];
     } else if (v.get_type() == Variant::INT) {
         return [NSNumber numberWithLongLong:(long)(int)v];
@@ -143,10 +142,10 @@ NSObject *variant_to_nsobject(Variant v) {
         return to_nsdictionary(v);
     } else if (v.get_type() == Variant::ARRAY) {
         return to_nsarray(v);
-    } else if (v.get_type() == Variant::POOL_BYTE_ARRAY) {
-        PoolByteArray arr = v;
+    } else if (v.get_type() == Variant::PACKED_BYTE_ARRAY) {
+        PackedByteArray arr = v;
         // PackedByteArray::Read r = arr.read();
-        NSData *result = [NSData dataWithBytes:arr.read().ptr() length:arr.size()];
+        NSData *result = [NSData dataWithBytes:arr.ptr() length:arr.size()];
         return result;
     }
     WARN_PRINT(String("Could not add unsupported type to iCloud: '" + Variant::get_type_name(v.get_type()) + "'").utf8().get_data());
