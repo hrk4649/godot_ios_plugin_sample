@@ -259,60 +259,60 @@ function build_plugin()
 }
 
 
-# function create_zip_archive()
-# {
-# 	if [[ ! -f "./godot/GODOT_VERSION" ]]
-# 	then
-# 		display_error "Error: godot wasn't downloaded properly. Can't create zip archive."
-# 		exit 1
-# 	fi
+function create_zip_archive()
+{
+	if [[ ! -f "./godot/GODOT_VERSION" ]]
+	then
+		display_error "Error: godot wasn't downloaded properly. Can't create zip archive."
+		exit 1
+	fi
 
-# 	GODOT_VERSION=$(cat ./godot/GODOT_VERSION)
+	GODOT_VERSION=$(cat ./godot/GODOT_VERSION)
 
-# 	if [[ -z $PLUGIN_VERSION ]]
-# 	then
-# 		godot_version_suffix="v$GODOT_VERSION"
-# 	else
-# 		godot_version_suffix="v$PLUGIN_VERSION"
-# 	fi
+	if [[ -z $PLUGIN_VERSION ]]
+	then
+		godot_version_suffix="v$GODOT_VERSION"
+	else
+		godot_version_suffix="v$PLUGIN_VERSION"
+	fi
 
-# 	file_name="$plugin_name-$godot_version_suffix.zip"
+	file_name="$plugin_name-$godot_version_suffix.zip"
 
-# 	if [[ -e "./bin/release/$file_name" ]]
-# 	then
-# 		display_warning "deleting existing $file_name file..."
-# 		rm ./bin/release/$file_name
-# 	fi
+	if [[ -e "./bin/release/$file_name" ]]
+	then
+		display_warning "deleting existing $file_name file..."
+		rm ./bin/release/$file_name
+	fi
 
-# 	tmp_directory="./bin/.tmp_zip_"
-# 	addon_directory="./addon"
+	tmp_directory="./bin/.tmp_zip_"
+	addon_directory="./addon"
 
-# 	if [[ -d "$tmp_directory" ]]
-# 	then
-# 		display_status "removing existing staging directory $tmp_directory"
-# 		rm -r $tmp_directory
-# 	fi
+	if [[ -d "$tmp_directory" ]]
+	then
+		display_status "removing existing staging directory $tmp_directory"
+		rm -r $tmp_directory
+	fi
 
-# 	if [[ -d "$addon_directory" ]]
-# 	then
-# 		mkdir -p $tmp_directory/addons/$plugin_name
-# 		cp -r $addon_directory/* $tmp_directory/addons/$plugin_name
-# 	fi
+	if [[ -d "$addon_directory" ]]
+	then
+		mkdir -p $tmp_directory/addons/$plugin_name
+		cp -r $addon_directory/* $tmp_directory/addons/$plugin_name
+	fi
 
-# 	mkdir -p $tmp_directory/ios/framework
-# 	find ./Pods -iname '*.xcframework' -type d -exec cp -r {} $tmp_directory/ios/framework \;
+	mkdir -p $tmp_directory/ios/framework
+	find ./Pods -iname '*.xcframework' -type d -exec cp -r {} $tmp_directory/ios/framework \;
 
-# 	mkdir -p $tmp_directory/ios/plugins
-# 	cp $CONFIGDIR/*.gdip $tmp_directory/ios/plugins
-# 	cp -r $FRAMEWORKDIR/$plugin_name.{release,debug}.xcframework $tmp_directory/ios/plugins
+	mkdir -p $tmp_directory/ios/plugins
+	cp $CONFIGDIR/*.gdip $tmp_directory/ios/plugins
+	cp -r $FRAMEWORKDIR/$plugin_name.{release,debug}.xcframework $tmp_directory/ios/plugins
 
-# 	mkdir -p $DESTDIR
+	mkdir -p $DESTDIR
 
-# 	display_status "creating $file_name file..."
-# 	cd $tmp_directory; zip -yr ../release/$file_name ./*; cd -
+	display_status "creating $file_name file..."
+	cd $tmp_directory; zip -yr ../release/$file_name ./*; cd -
 
-# 	rm -rf $tmp_directory
-# }
+	rm -rf $tmp_directory
+}
 
 
 while getopts "aA:bcgG:hHipPt:z:" option; do
