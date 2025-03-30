@@ -14,7 +14,12 @@ $ script/build.sh -g
 $ script/build.sh -G 4.4
 # generate godot header
 $ script/build.sh -H
+```
 
+```bash
+$./plugin
+Plugin name: sample-123
+Singleton name: Sample123
 ```
 
 
