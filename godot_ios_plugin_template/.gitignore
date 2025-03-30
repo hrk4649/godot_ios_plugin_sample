@@ -32,3 +32,5 @@ DerivedData/
 *.dblite
 
 bin/*
+
+godot/
