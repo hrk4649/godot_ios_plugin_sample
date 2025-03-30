@@ -79,13 +79,18 @@ name="{display_name}"
 binary="{plname}.xcframework"
 initialization="{cpp_plname}_init"
 deinitialization="{cpp_plname}_deinit"
+# enable next line when using swift
+# use_swift_runtime=true
 
 [dependencies]
 linked=[]
 embedded=[]
 system=[]
+# system=["Foundation.framework","StoreKit.framework"]
 capabilities=[]
 files=[]
+# linker_flags=["-ObjC","-Wl,-weak-lswiftCore,-weak-lswiftObjectiveC,-weak-lswift_Concurrency"]
+
 [plist]
 """.format(display_name=display_name, plname=plname, cpp_plname=cpp_plname)
 
