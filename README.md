@@ -6,6 +6,8 @@ This is a sample to build a ios plugin for godot 4.4.
 
 There is a list of steps to build the plugin.
 
+### generate godot header files
+
 ```bash
 $ cd godot_ios_plugin_template
 # clean godot directory
@@ -13,13 +15,14 @@ $ script/build.sh -g
 # download specified godot version
 $ script/build.sh -G 4.4
 # generate godot header
-$ script/build.sh -H
+$ script/build.sh -Ht 600
 ```
 
 ```bash
 $./plugin
 Plugin name: sample-123
 Singleton name: Sample123
+Use Swift: 1
 ```
 
 ### add method ```String helloSample123(arg1:String)```

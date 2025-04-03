@@ -72,27 +72,41 @@ def replace_template(filename, template, value):
     except IOError as e:
         print_error(e)
 
-def store_plugin_name(plname, cpp_plname, display_name):
+def store_plugin_name(plname, cpp_plname, display_name, use_swift_flg):
+
+    param_use_swift_runtime = ''
+    param_system = 'system=[]'
+    param_linker_flags = ''
+    if use_swift_flg:
+        param_use_swift_runtime = 'use_swift_runtime=true'
+        param_system = 'system=["Foundation.framework","StoreKit.framework"]'
+        param_linker_flags = 'linker_flags=["-ObjC","-Wl,-weak-lswiftCore,-weak-lswiftObjectiveC,-weak-lswift_Concurrency"]'
+
     gdip = """
 [config]
 name="{display_name}"
 binary="{plname}.xcframework"
 initialization="{cpp_plname}_init"
 deinitialization="{cpp_plname}_deinit"
-# enable next line when using swift
-# use_swift_runtime=true
+{param_use_swift_runtime}
 
 [dependencies]
 linked=[]
 embedded=[]
-system=[]
-# system=["Foundation.framework","StoreKit.framework"]
+{param_system}
 capabilities=[]
 files=[]
-# linker_flags=["-ObjC","-Wl,-weak-lswiftCore,-weak-lswiftObjectiveC,-weak-lswift_Concurrency"]
+{param_linker_flags}
 
 [plist]
-""".format(display_name=display_name, plname=plname, cpp_plname=cpp_plname)
+""".format(
+    display_name=display_name,
+    plname=plname,
+    cpp_plname=cpp_plname,
+    param_use_swift_runtime=param_use_swift_runtime,
+    param_system=param_system,
+    param_linker_flags=param_linker_flags
+    )
 
     cpp_header = """
 void {cpp_plname}_init();
@@ -316,7 +330,23 @@ def set_plugin_name():
         if errors <= 0:
             break
     print_bold('Using singleton name '+display_name)
-    store_plugin_name(plname, cpp_plname, display_name)
+    print_green('Will this plugin use Swift?:')
+    print_bold(' 0: No')
+    print_bold(' 1: Yes')
+    use_swift = ''
+    use_swift_flg = False
+    while True:
+        use_swift = input('Use Swift: ')
+        if use_swift == '':
+            cancel()
+        elif use_swift == '0':
+            break
+        elif use_swift == '1':
+            use_swift_flg = True
+            break
+    print_bold('Use Swift:'+str(use_swift_flg))
+
+    store_plugin_name(plname, cpp_plname, display_name, use_swift_flg)
 
 def input_cpp_type(include_void):
     if include_void:
