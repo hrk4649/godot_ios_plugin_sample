@@ -6,5 +6,6 @@ func _ready() -> void:
         var singleton = Engine.get_singleton("Sample123")
         print(singleton.helloSample123("Foo"))
         print(singleton.helloInt(123))
+        print(singleton.helloFloat(123.4))
     else:
         print("no Sample123")
