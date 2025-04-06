@@ -9,5 +9,11 @@ func _ready() -> void:
         print(singleton.helloFloat(123.4))
         var array = ["hello", 123, 123.4]
         print(singleton.helloArray(array))
+        var dict = {
+            "foo":123,
+            "bar":12.3,
+            "baz":"baz"
+        }
+        print(singleton.helloDictionary(dict))
     else:
         print("no Sample123")
