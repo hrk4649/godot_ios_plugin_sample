@@ -177,6 +177,57 @@ Select operation:
 Operation: 3
 ```
 
+### add method ```Array helloArray(arg1:Array)```
+
+```bash
+% ./plugin
+*** Godot iOS plugin template ***
+Select operation:
+ 0: Change plugin name
+ 1: Add new CPP method
+ 2: Add new Swift method
+ 3: Exit
+Operation: 2
+Enter new method's name (use only letters, digits and dash):
+Or press enter to cancel operation
+Method name: helloArray
+Select method's return type:
+ 0: void (no value)
+ 1: int (integral number)
+ 2: float (decimal number)
+ 3: String
+ 4: Array
+ 5: Dictionary
+Return type: 4
+Set input argument types
+Current method declaration: Array helloArray ()
+Select operation:
+Or press enter to cancel operation
+ 0: Finish method declaration
+ 1: Add one more input argument
+Operation: 1
+Select type for new argument
+ 1: int (integral number)
+ 2: float (decimal number)
+ 3: String
+ 4: Array
+ 5: Dictionary
+Return type: 4
+Current method declaration: Array helloArray (Array)
+Select operation:
+Or press enter to cancel operation
+ 0: Finish method declaration
+ 1: Add one more input argument
+Operation: 0
+Generated new method: Array helloArray (Array)
+Select operation:
+ 0: Change plugin name
+ 1: Add new CPP method
+ 2: Add new Swift method
+ 3: Exit
+Operation: 3
+```
+
 # Reference
 
 - Godot iOS Plugin template https://github.com/DrMoriarty/godot_ios_plugin_template
