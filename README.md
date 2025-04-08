@@ -335,6 +335,90 @@ import Foundation
 }
 ```
 
+## Using Godot's signal
+
+There are code snippets to use Godot's signal.
+Following snippets was added manually.
+
+### godot_plugin_class.h
+
+- define callback type.
+
+```c
+// callback definition
+typedef void (^EventCallback)(NSString *eventName, NSDictionary *data);
+
+```
+
+### SwiftClass.swift
+
+- define ```callback``` variable to keep callback.
+- add ```requestSignal()``` using ```plugin``` script.
+- ```requestSignal()``` calls ```triggerEvent()```.
+- ```triggerEvent()``` calls ```callback```.
+
+```swift
+@objcMembers public class SwiftClass : NSObject
+{
+    static let shared = SwiftClass()
+    var callback: ((String, [String: Any]) -> Void)?
+    func triggerEvent(a1: NSString) {
+        callback?("my_event", [
+            "message": "Hello from Swift",
+            "from_godot": a1
+            ])
+    }
+// --8<--
+    static func requestSignal(a1: NSString)  {
+        shared.triggerEvent(a1: a1)
+    }
+}
+```
+
+### godot_plugin_class.mm
+
+- define a signal using ```ADD_SIGNAL()```.
+- set a body of callback to ```SwiftClass.callback``` in ```PluginClass``` constructor.
+- set nil to ```SwiftClass.callback``` in ```PluginClass``` destructor.
+
+```objc
+/*
+ * Bind plugin's public interface
+ */
+void PluginClass::_bind_methods() {
+    ClassDB::bind_method(D_METHOD("requestSignal"), &PluginClass::requestSignal);
+
+    ADD_SIGNAL(MethodInfo("event_received", 
+        PropertyInfo(Variant::STRING, "event"),
+        PropertyInfo(Variant::DICTIONARY, "data")));
+}
+
+PluginClass::PluginClass() {
+    NSLog(@"initialize object");
+    EventCallback cb = ^(NSString *eventName, NSDictionary *data) {
+        NSLog(@"in the callback");
+        String cEventName = from_nsstring(eventName);
+        Dictionary cData = from_nsdictionary(data);
+        emit_signal("event_received", cEventName, cData);
+    };
+    [SwiftClass shared].callback = cb;
+}
+
+PluginClass::~PluginClass() {
+    NSLog(@"deinitialize object");
+    [SwiftClass shared].callback = nil;
+}
+
+// -- 8< --
+
+void PluginClass::requestSignal(String arg1) {
+    NSString *a1 = to_nsstring(arg1);
+    [SwiftClass requestSignalWithA1:a1 ];
+}
+```
+
+
+
 # Reference
 
 - Godot iOS Plugin template https://github.com/DrMoriarty/godot_ios_plugin_template
