@@ -14,13 +14,31 @@ This sample uses scripts from [godot_ios_plugin_template](https://github.com/DrM
 This sample also uses scripts from 
 [godot-ios-inapp-review-plugin](https://github.com/cengiz-pz/godot-ios-inapp-review-plugin) to generate Godot header files.
 
-## environment
+## contents
+
+- Environment
+- Files
+- Plugin build steps
+- Using Godot's signal
+- References
+
+## Environment
 
 - Godot: 4.4
 - macOS: Sequoia 15.3.2
 - Xcode: 16.3
 
-## files
+## Files
+
+- ```godot_ios_plugin_template```
+    - original is [godot_ios_plugin_template](https://github.com/DrMoriarty/godot_ios_plugin_template)
+    - changed to fit Godot 4.4
+    - include [godot-ios-inapp-review-plugin](https://github.com/cengiz-pz/godot-ios-inapp-review-plugin) script
+- ```ios_plugin_sample```
+    - copy from ```godot_ios_plugin_template``` and generate plugin ```sample-123```
+- ```ios_plugin_sample_project```
+    - Godot project to use plugin ```sample-123```
+
 
 ```
 godot_ios_plugin_sample
@@ -44,6 +62,7 @@ godot_ios_plugin_sample
 │       ├── echocolor.sh
 │       ├── install.sh
 │       └── run_with_timeout.sh
+├── ios_plugin_sample
 └── ios_plugin_sample_project
     ├── export_presets.cfg
     ├── icon.svg
@@ -57,7 +76,7 @@ godot_ios_plugin_sample
     └── project.godot
 ```
 
-## Steps
+## Plugin build steps
 
 There is a list of steps to build the plugin.
 
@@ -474,7 +493,7 @@ void PluginClass::requestSignal(String arg1) {
 
 
 
-# Reference
+## References
 
 - Godot iOS Plugin template https://github.com/DrMoriarty/godot_ios_plugin_template
     - ```godot_ios_plugin_template```
