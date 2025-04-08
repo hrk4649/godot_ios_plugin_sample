@@ -1,6 +1,61 @@
-# godot_ios_plugin_sample
+# Godot iOS plugin sample
 
-This is a sample to build a ios plugin for godot 4.4.
+This is a sample to build a ios plugin with Swift for Godot 4.4.
+
+In this sample, adding methods using a variety of types, which are
+int, float, string, array and dictionary, as an argument and return value.
+Adding methods are done by ```plugin``` script.
+
+There are snippet codes to send a [signal](https://docs.godotengine.org/en/stable/classes/class_signal.html) from Swift to Godot.
+
+----
+
+This sample uses scripts from [godot_ios_plugin_template](https://github.com/DrMoriarty/godot_ios_plugin_template) but some files are changed to fit to use Swift in Godot 4.4.
+This sample also uses scripts from 
+[godot-ios-inapp-review-plugin](https://github.com/cengiz-pz/godot-ios-inapp-review-plugin) to generate Godot header files.
+
+## environment
+
+- Godot: 4.4
+- macOS: Sequoia 15.3.2
+- Xcode: 16.3
+
+## files
+
+```
+godot_ios_plugin_sample
+├── LICENSE
+├── README.md
+├── godot_ios_plugin_template
+│   ├── copy_plugin.sh
+│   ├── generate_static_library.sh
+│   ├── godot
+│   ├── godot_plugin
+│   │   ├── SwiftClass.swift
+│   │   ├── godot_plugin-Bridging-Header.h
+│   │   ├── godot_plugin.h
+│   │   ├── godot_plugin.mm
+│   │   ├── godot_plugin_class.h
+│   │   └── godot_plugin_class.mm
+│   ├── godot_plugin.xcodeproj
+│   │   └── project.pbxproj
+│   └── script
+│       ├── build.sh
+│       ├── echocolor.sh
+│       ├── install.sh
+│       └── run_with_timeout.sh
+└── ios_plugin_sample_project
+    ├── export_presets.cfg
+    ├── icon.svg
+    ├── icon.svg.import
+    ├── ios
+    │   └── plugins
+    │       └── sample-123
+    ├── main.gd
+    ├── main.gd.uid
+    ├── main.tscn
+    └── project.godot
+```
 
 ## Steps
 
@@ -338,7 +393,7 @@ import Foundation
 ## Using Godot's signal
 
 There are code snippets to use Godot's signal.
-Following snippets was added manually.
+Following snippets are added manually.
 
 ### godot_plugin_class.h
 
