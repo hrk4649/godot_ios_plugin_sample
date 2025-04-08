@@ -15,5 +15,11 @@ func _ready() -> void:
             "baz":"baz"
         }
         print(singleton.helloDictionary(dict))
+        singleton.event_received.connect(_on_signal)
+        singleton.requestSignal('hello')
     else:
         print("no Sample123")
+
+func _on_signal(event_name:String, data:Dictionary):
+    var data_str = JSON.stringify(data)
+    print("received signal:event_name:%s data:%s" % [event_name, data_str])
