@@ -37,7 +37,7 @@ This sample also uses scripts from
 - ```ios_plugin_sample```
     - copy from ```godot_ios_plugin_template``` and generate plugin ```sample-123```
 - ```ios_plugin_sample_project```
-    - Godot project to use plugin ```sample-123```
+    - a Godot project to use plugin ```sample-123```
 
 
 ```
