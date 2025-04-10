@@ -15,8 +15,9 @@ func _ready() -> void:
             "baz":"baz"
         }
         print(singleton.helloDictionary(dict))
-        singleton.event_received.connect(_on_signal)
-        singleton.requestSignal('hello')
+        # uncomment the following 2 lines to try signal
+        # singleton.event_received.connect(_on_signal)
+        # singleton.requestSignal('hello')
     else:
         print("no Sample123")
 
