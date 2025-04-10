@@ -14,26 +14,29 @@ This sample uses scripts from [godot_ios_plugin_template](https://github.com/DrM
 This sample also uses scripts from 
 [godot-ios-inapp-review-plugin](https://github.com/cengiz-pz/godot-ios-inapp-review-plugin) to generate Godot header files.
 
-## contents
+### Contents
 
-- Environment
-- Files
-- Plugin build steps
-- Using Godot's signal
-- References
+- 1 Environment
+- 2 Files
+- 3 Plugin build steps
+- 4 Using Godot's signal
+- 5 References
 
-## Environment
+## 1 Environment
 
 - Godot: 4.4
 - macOS: Sequoia 15.3.2
 - Xcode: 16.3
+- scons: v4.8.1
+- python: 3.12
+- iPhone: iPhone SE, iOS 18.3.2
 
-## Files
+## 2 Files
 
 - ```godot_ios_plugin_template```
     - original is [godot_ios_plugin_template](https://github.com/DrMoriarty/godot_ios_plugin_template)
     - changed to fit Godot 4.4
-    - include [godot-ios-inapp-review-plugin](https://github.com/cengiz-pz/godot-ios-inapp-review-plugin) script
+    - include script files from [godot-ios-inapp-review-plugin](https://github.com/cengiz-pz/godot-ios-inapp-review-plugin) 
 - ```ios_plugin_sample```
     - copy from ```godot_ios_plugin_template``` and generate plugin ```sample-123```
 - ```ios_plugin_sample_project```
@@ -76,14 +79,26 @@ godot_ios_plugin_sample
     └── project.godot
 ```
 
-## Plugin build steps
+## 3 Plugin build steps
 
-There is a list of steps to build the plugin.
+There is a list of steps from building the plugin to running a Godot project on iPhone.
 
-### generate godot header files
+- copy the plugin template directory and generate godot header files
+- add method ```String helloSample123(arg1:String)```
+- add method ```int helloInt(arg1:Int)```
+- add method ```float helloFloat(arg1:Float)```
+- add method ```Array helloArray(arg1:Array)```
+- add method ```Dictionary helloDictionary(arg1:Dictionary)```
+- edit SwiftClass.swift
+- generate plugin's static library and copy it into Godot project
+- run Godot project on iPhone
+
+### copy the plugin template directory and generate godot header files
 
 ```bash
-$ cd godot_ios_plugin_template
+$ cd godot_ios_plugin_sample
+$ cp -r godot_ios_plugin_template ios_plugin_sample
+$ cd ios_plugin_sample
 # clean godot directory
 $ script/build.sh -g
 # download specified godot version
@@ -91,6 +106,8 @@ $ script/build.sh -G 4.4
 # generate godot header
 $ script/build.sh -Ht 600
 ```
+
+### define plugin name
 
 ```bash
 $./plugin
@@ -352,7 +369,8 @@ Select operation:
  3: Exit
 Operation: 3
 ```
-### SwiftClass.swift
+
+### edit SwiftClass.swift
 
 ```swift
 import Foundation
@@ -409,10 +427,40 @@ import Foundation
 }
 ```
 
-## Using Godot's signal
+### generate plugin's static library and copy it into Godot project
+
+```bash
+$ ./generate_static_library.sh
+$ ./copy_plugin.sh
+```
+
+### run Godot project on iPhone
+
+- open ios_plugin_sample_project using Godot 4.4
+- open ```Project > Export``` and select ```iOS``` preset
+- edit ```App Store Team ID``` and ```Bundle Identifier``` to yours. (You have a chance to change Team ID in ```Signing & Capabilities``` in Xcode)
+- edit ```Bundle Identifier``` to yours
+- check that plugin ```Sample 123``` is on
+- export a project into somewhere you want. the preset is configured to ```../../export_ios```
+- open Finder and click ```../../export_ios/ios_plugin_sample_project.xcodeproj``` to open Xcode
+- connect your iPhone and run the project
+
+You can reference [Exporting for iOS](https://docs.godotengine.org/en/stable/tutorials/export/exporting_for_ios.html)
+
+## 4 Using Godot's signal
 
 There are code snippets to use Godot's signal.
 Following snippets are added manually.
+
+The directory ```ios_plugin_sample``` is ready to use signal. if you want to try signal, uncomment the following line in ```main.gd``` in ```ios_plugin_sample_project```.
+
+```
+func _ready() -> void:
+# -- 8< --
+        # uncomment the following 2 lines to try signal
+        # singleton.event_received.connect(_on_signal)
+        # singleton.requestSignal('hello')
+```
 
 ### godot_plugin_class.h
 
@@ -493,8 +541,11 @@ void PluginClass::requestSignal(String arg1) {
 
 
 
-## References
+## 5 References
 
+This repository was created with the following information:
+
+- Use Swift as the main language for iOS plugins https://github.com/godotengine/godot-proposals/issues/2895
 - Godot iOS Plugin template https://github.com/DrMoriarty/godot_ios_plugin_template
     - ```godot_ios_plugin_template```
         - ```generate_static_library.sh```
