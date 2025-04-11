@@ -95,22 +95,22 @@ There is a list of steps from building the plugin to running a Godot project on 
 
 ### copy the plugin template directory and generate godot header files
 
-```
-$ cd godot_ios_plugin_sample
-$ cp -r godot_ios_plugin_template ios_plugin_sample
-$ cd ios_plugin_sample
+```bash
+% cd godot_ios_plugin_sample
+% cp -r godot_ios_plugin_template ios_plugin_sample
+% cd ios_plugin_sample
 # clean godot directory
-$ script/build.sh -g
+% script/build.sh -g
 # download specified godot version
-$ script/build.sh -G 4.4
+% script/build.sh -G 4.4
 # generate godot header
-$ script/build.sh -Ht 600
+% script/build.sh -Ht 600
 ```
 
 ### define plugin name
 
-```
-$./plugin
+```bash
+% ./plugin
 Plugin name: sample-123
 Singleton name: Sample123
 Use Swift: 1
@@ -118,8 +118,8 @@ Use Swift: 1
 
 ### add method ```String helloSample123(arg1:String)```
 
-```
-./plugin
+```bash
+% ./plugin
 *** Godot iOS plugin template ***
 Select operation:
  0: Change plugin name
@@ -169,7 +169,7 @@ Operation: 3
 
 ### add method ```int helloInt(arg1:Int)```
 
-```
+```bash
 % ./plugin
 *** Godot iOS plugin template ***
 Select operation:
@@ -220,7 +220,7 @@ Operation: 3
 
 ### add method ```float helloFloat(arg1:Float)```
 
-```
+```bash
 % ./plugin
 *** Godot iOS plugin template ***
 Select operation:
@@ -271,7 +271,7 @@ Operation: 3
 
 ### add method ```Array helloArray(arg1:Array)```
 
-```
+```bash
 % ./plugin
 *** Godot iOS plugin template ***
 Select operation:
@@ -322,7 +322,7 @@ Operation: 3
 
 ### add method ```Dictionary helloDictionary(arg1:Dictionary)```
 
-```
+```bash
 % ./plugin 
 *** Godot iOS plugin template ***
 Select operation:
@@ -430,7 +430,7 @@ import Foundation
 
 ### generate plugin's static library and copy it into Godot project
 
-```
+```bash
 % ./generate_static_library.sh
 % ./copy_plugin.sh
 ```
