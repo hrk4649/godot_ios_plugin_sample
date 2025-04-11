@@ -39,6 +39,7 @@ This sample also uses scripts from
     - include script files from [godot-ios-inapp-review-plugin](https://github.com/cengiz-pz/godot-ios-inapp-review-plugin) 
 - ```ios_plugin_sample```
     - copied from ```godot_ios_plugin_template``` and define a plugin named ```sample-123```
+    - this plugin is ready to use signal described in [4 Using Godot's signal](#4-using-godots-signal)
 - ```ios_plugin_sample_project```
     - a Godot project to use ```sample-123``` plugin
 
