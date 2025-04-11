@@ -38,9 +38,9 @@ This sample also uses scripts from
     - changed to fit Godot 4.4
     - include script files from [godot-ios-inapp-review-plugin](https://github.com/cengiz-pz/godot-ios-inapp-review-plugin) 
 - ```ios_plugin_sample```
-    - copy from ```godot_ios_plugin_template``` and generate plugin ```sample-123```
+    - copied from ```godot_ios_plugin_template``` and define a plugin named ```sample-123```
 - ```ios_plugin_sample_project```
-    - a Godot project to use plugin ```sample-123```
+    - a Godot project to use ```sample-123``` plugin
 
 
 ```
@@ -95,7 +95,7 @@ There is a list of steps from building the plugin to running a Godot project on 
 
 ### copy the plugin template directory and generate godot header files
 
-```bash
+```
 $ cd godot_ios_plugin_sample
 $ cp -r godot_ios_plugin_template ios_plugin_sample
 $ cd ios_plugin_sample
@@ -109,7 +109,7 @@ $ script/build.sh -Ht 600
 
 ### define plugin name
 
-```bash
+```
 $./plugin
 Plugin name: sample-123
 Singleton name: Sample123
@@ -117,7 +117,8 @@ Use Swift: 1
 ```
 
 ### add method ```String helloSample123(arg1:String)```
-```bash
+
+```
 ./plugin
 *** Godot iOS plugin template ***
 Select operation:
@@ -168,7 +169,7 @@ Operation: 3
 
 ### add method ```int helloInt(arg1:Int)```
 
-```bash
+```
 % ./plugin
 *** Godot iOS plugin template ***
 Select operation:
@@ -219,7 +220,7 @@ Operation: 3
 
 ### add method ```float helloFloat(arg1:Float)```
 
-```bash
+```
 % ./plugin
 *** Godot iOS plugin template ***
 Select operation:
@@ -270,7 +271,7 @@ Operation: 3
 
 ### add method ```Array helloArray(arg1:Array)```
 
-```bash
+```
 % ./plugin
 *** Godot iOS plugin template ***
 Select operation:
@@ -321,7 +322,7 @@ Operation: 3
 
 ### add method ```Dictionary helloDictionary(arg1:Dictionary)```
 
-```bash
+```
 % ./plugin 
 *** Godot iOS plugin template ***
 Select operation:
@@ -429,9 +430,9 @@ import Foundation
 
 ### generate plugin's static library and copy it into Godot project
 
-```bash
-$ ./generate_static_library.sh
-$ ./copy_plugin.sh
+```
+% ./generate_static_library.sh
+% ./copy_plugin.sh
 ```
 
 ### run Godot project on iPhone
