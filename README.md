@@ -443,6 +443,7 @@ $ ./copy_plugin.sh
 - check that plugin ```Sample 123``` is on
 - export a project into somewhere you want. the preset is configured to ```../../export_ios```
 - open Finder and click ```../../export_ios/ios_plugin_sample_project.xcodeproj``` to open Xcode
+- fix ```Signing``` in ```Signing & Capabilities``` tab to build the project
 - connect your iPhone and run the project
 
 You can reference [Exporting for iOS](https://docs.godotengine.org/en/stable/tutorials/export/exporting_for_ios.html)
